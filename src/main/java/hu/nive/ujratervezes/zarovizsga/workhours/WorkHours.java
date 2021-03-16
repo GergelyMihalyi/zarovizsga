@@ -4,10 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 public class WorkHours {
+
+    public static final String SEPARATION_SIGN = ",";
+    public static final int NAME_INDEX = 0;
+    public static final int HOURS_INDEX = 1;
+    public static final int DATE_INDEX = 2;
+
     public String minWork(String file) {
         System.out.println(file);
         Path workerFile = Path.of(file);
@@ -27,17 +31,17 @@ public class WorkHours {
     }
 
     private Worker addWorker(String line) {
-        String[] pieces = line.split(",");
-        String name = pieces[0];
-        int workHours = Integer.parseInt(pieces[1]);
-        String workDate = pieces[2];
+        String[] pieces = line.split(SEPARATION_SIGN);
+        String name = pieces[NAME_INDEX];
+        int workHours = Integer.parseInt(pieces[HOURS_INDEX]);
+        String workDate = pieces[DATE_INDEX];
         Worker worker = new Worker(name, workHours, workDate);
         return worker;
     }
 
     private int workHours(String line) {
-        String[] pieces = line.split(",");
-        int workHours = Integer.parseInt(pieces[1]);
+        String[] pieces = line.split(SEPARATION_SIGN);
+        int workHours = Integer.parseInt(pieces[HOURS_INDEX]);
         return workHours;
     }
 }
