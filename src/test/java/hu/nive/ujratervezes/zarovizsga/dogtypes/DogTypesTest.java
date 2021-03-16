@@ -19,11 +19,11 @@ public class DogTypesTest {
     void init() throws SQLException {
         MariaDbDataSource dataSource;
         dataSource = new MariaDbDataSource();
-        dataSource.setUrl("jdbc:mariadb://localhost:3306/employees?useUnicode=true");
-        dataSource.setUser("employees");
-        dataSource.setPassword("employees");
+        dataSource.setUrl("jdbc:mariadb://localhost:3306/activitytracker?useUnicode=true");
+        dataSource.setUser("activitytracker");
+        dataSource.setPassword("activitytracker");
 
-        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+        Flyway flyway = Flyway.configure().locations("filesystem:./src/main/resources/db.migration").dataSource(dataSource).load();
 
         flyway.clean();
         flyway.migrate();
@@ -35,6 +35,7 @@ public class DogTypesTest {
     @Test
     void testGetDogsByCountry() {
         List<String> types = dogTypes.getDogsByCountry("Hungary");
+        System.out.println(types);
         assertEquals(9, types.size());
         assertTrue(types.contains("komondor"));
         assertTrue(types.contains("kuvasz"));
