@@ -23,7 +23,7 @@ public class DogTypesTest {
         dataSource.setUser("activitytracker");
         dataSource.setPassword("activitytracker");
 
-        Flyway flyway = Flyway.configure().locations("filesystem:./src/main/resources/db.migration").dataSource(dataSource).load();
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
 
         flyway.clean();
         flyway.migrate();
